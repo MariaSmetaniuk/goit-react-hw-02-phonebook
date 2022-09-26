@@ -14,9 +14,13 @@ export class App extends Component {
   };
 
   addContact = (name, number) => {
+    const { contacts } = this.state;
     const id = nanoid();
-    this.isContactAdded(name)
-      ? alert(`${name} is already in contacts.`)
+
+    const isContactAdded = contacts.find(contact => name === contact.name);
+
+    isContactAdded
+      ? alert(`${isContactAdded.name} is already in contacts.`)
       : this.setState(prevState => {
           return {
             contacts: [...prevState.contacts, { name, id, number }],
@@ -24,17 +28,17 @@ export class App extends Component {
         });
   };
 
-  removeContact = idToRemove => {
-    this.setState(prevState => {
+  removeContact = async idToRemove => {
+    await this.setState(prevState => {
       return {
         contacts: prevState.contacts.filter(({ id }) => id !== idToRemove),
       };
     });
-  };
 
-  isContactAdded = nameToCompare => {
-    const { contacts } = this.state;
-    return contacts.some(({ name }) => name === nameToCompare);
+    if (this.state.contacts.length === 0) {
+      console.log('filter 0');
+      this.setState({ filter: '' });
+    }
   };
 
   changeFilter = e => {
