@@ -5,15 +5,11 @@ import { Box } from './Box';
 import { ContactForm } from './ContactForm/ContactForm';
 import { Filter } from './Filter/Filter';
 import { ContactList } from './ContactList/ContactList';
+import { Notification } from './Notification/Notification';
 
 export class App extends Component {
   state = {
-    contacts: [
-      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-    ],
+    contacts: [],
     filter: '',
   };
 
@@ -57,15 +53,33 @@ export class App extends Component {
     const { contacts, filter } = this.state;
     const filteredContacts = this.getFilteredContacts();
     return (
-      <Box height="100vh" p={5} bg="muted" as="main">
-        <h1>Phonebook</h1>
-        <ContactForm onSubmit={this.addContact} />
-        <h2>Contacts</h2>
-        <Filter value={filter} onChange={this.changeFilter} />
-        <ContactList
-          contacts={filter === '' ? contacts : filteredContacts}
-          onRemoveContact={this.removeContact}
-        />
+      <Box p={5} as="main">
+        <Box
+          width="430px"
+          p={4}
+          mx="auto"
+          bg="white"
+          borderRadius="md"
+          boxShadow="primary"
+          color="text"
+        >
+          <h1>Phonebook</h1>
+          <ContactForm onAddContact={this.addContact} />
+          <h2>Contacts</h2>
+          <Box mt={4}>
+            {contacts.length > 0 ? (
+              <>
+                <Filter value={filter} onChange={this.changeFilter} />
+                <ContactList
+                  contacts={filter === '' ? contacts : filteredContacts}
+                  onRemoveContact={this.removeContact}
+                />
+              </>
+            ) : (
+              <Notification />
+            )}
+          </Box>
+        </Box>
         <GlobalStyle />
       </Box>
     );

@@ -9,6 +9,7 @@ export const GlobalStyle = createGlobalStyle`
       sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color: ${p => p.theme.colors.background};
   }
   code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',

@@ -1,22 +1,15 @@
 import styled from 'styled-components';
-import { Form, Field } from 'formik';
-
-export const FormStyled = styled(Form)`
-  display: flex;
-  flex-direction: column;
-  gap: ${p => p.theme.space[3]}px;
-`;
 
 export const Label = styled.label`
-  div {
+  span {
     padding-left: ${p => p.theme.space[2]}px;
     font-size: ${p => p.theme.fontSizes.m};
   }
 `;
 
-export const Input = styled(Field)`
-  display: inline-block;
-  width: 240px;
+export const Field = styled.input`
+  display: block;
+  width: 60%;
   margin-top: ${p => p.theme.space[2]}px;
   padding: ${p => p.theme.space[2]}px;
   font-size: ${p => p.theme.fontSizes.s};
