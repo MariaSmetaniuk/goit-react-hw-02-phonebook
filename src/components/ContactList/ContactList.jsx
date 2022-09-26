@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Button } from 'components/Button/Button.styled';
 import { List, Item } from './ContactList.styled';
 
@@ -25,3 +26,14 @@ export class ContactList extends Component {
     );
   }
 }
+
+ContactList.propTypes = {
+  contacts: PropTypes.arrayOf(
+    PropTypes.exact({
+      id: PropTypes.string,
+      name: PropTypes.string,
+      number: PropTypes.string,
+    })
+  ).isRequired,
+  onRemoveContact: PropTypes.func.isRequired,
+};

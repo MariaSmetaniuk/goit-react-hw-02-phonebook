@@ -36,7 +36,6 @@ export class App extends Component {
     });
 
     if (this.state.contacts.length === 0) {
-      console.log('filter 0');
       this.setState({ filter: '' });
     }
   };
