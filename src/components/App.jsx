@@ -19,13 +19,15 @@ export class App extends Component {
 
     const isContactAdded = contacts.find(contact => name === contact.name);
 
-    isContactAdded
-      ? alert(`${isContactAdded.name} is already in contacts.`)
-      : this.setState(prevState => {
-          return {
-            contacts: [...prevState.contacts, { name, id, number }],
-          };
-        });
+    if (isContactAdded) {
+      alert(`${name} is already in contacts.`);
+      return;
+    }
+    this.setState(prevState => {
+      return {
+        contacts: [...prevState.contacts, { name, id, number }],
+      };
+    });
   };
 
   removeContact = async idToRemove => {
